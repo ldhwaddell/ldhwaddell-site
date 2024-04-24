@@ -1,5 +1,3 @@
-import { ModeToggle } from "@/components/mode-toggle";
-import Pipes from "@/components/pipes";
 import Header from "@/components/header";
 import { Separator } from "@/components/ui/separator";
 import About from "@/components/about";
