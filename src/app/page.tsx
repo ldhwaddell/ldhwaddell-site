@@ -1,18 +1,17 @@
 import Header from "@/components/header";
 import { Separator } from "@/components/ui/separator";
 import About from "@/components/about";
-
+import Projects from "@/components/projects";
 
 export default function Home() {
   return (
-    <main className="flex w-full min-h-screen flex-col items-center justify-center mx-auto">
+    <main className="flex w-full min-h-screen flex-col items-center mx-auto">
       <Header />
-      <Separator />
+      <Separator className="mt-24" />
       <About />
       <Separator />
-
-
-
+      <Projects />
+      <Separator />
     </main>
   );
 }
