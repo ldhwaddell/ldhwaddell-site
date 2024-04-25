@@ -2,6 +2,7 @@ import Header from "@/components/header";
 import { Separator } from "@/components/ui/separator";
 import About from "@/components/about";
 import Projects from "@/components/projects";
+import Footer from "@/components/footer";
 
 export default function Home() {
   return (
@@ -12,6 +13,7 @@ export default function Home() {
       <Separator />
       <Projects />
       <Separator />
+      <Footer/>
     </main>
   );
 }
