@@ -24,7 +24,7 @@ export const skills: Skill[] = [
   { text: "Bash", Icon: Bash },
   { text: "Docker", Icon: Docker },
   { text: "Git", Icon: Git },
-  { text: "Next.JS", Icon: NextJS },
+  { text: "Next.js", Icon: NextJS },
   { text: "Postgres", Icon: Postgres },
   { text: "React", Icon: React },
   { text: "Selenium", Icon: Selenium },
