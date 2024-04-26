@@ -10,7 +10,7 @@ const About = () => {
     >
       <div className="w-3/4">
         <TypographyH2 text="About Me" />
-        <p className="leading-7">
+        <p className="leading-7 mt-4">
           I am a dedicated software engineer interested in designing systems to
           collect, process, and analyze data. Having recently graduated with a
           degree in Computer Science from Saint Mary&apos;s University, I am
