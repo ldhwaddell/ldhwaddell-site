@@ -10,7 +10,7 @@ import { skills } from "@/data/skills";
 export function Skills() {
   return (
     <>
-      <div className="grid grid-cols-12 gap-3">
+      <div className="grid grid-cols-4 md:grid-cols-12 sm:grid-cols-8 gap-3">
         <TooltipProvider delayDuration={100}>
           {skills.map((skill, index) => {
             return (
