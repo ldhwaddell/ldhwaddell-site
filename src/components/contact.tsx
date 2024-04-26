@@ -45,7 +45,7 @@ const FormSchema = z.object({
 });
 
 const ContactForm = () => {
-  const [loading, setLoading] = useState<boolean>(false);
+  const [sending, setSending] = useState<boolean>(false);
 
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
@@ -58,7 +58,7 @@ const ContactForm = () => {
 
   function onSubmit(data: z.infer<typeof FormSchema>) {
     const apiEndpoint = "/api/email";
-    setLoading(true);
+    setSending(true);
 
     fetch(apiEndpoint, {
       method: "POST",
@@ -96,7 +96,7 @@ const ContactForm = () => {
             err.toString() || "There was a problem with your request.",
         });
       })
-      .finally(() => setLoading(false));
+      .finally(() => setSending(false));
   }
 
   return (
@@ -158,7 +158,7 @@ const ContactForm = () => {
               )}
             />
             <div className="w-40">
-              {loading ? (
+              {sending ? (
                 <Button disabled className="w-full">
                   Sending... <Loader2 className="ml-3 h-4 w-4 animate-spin" />
                 </Button>
