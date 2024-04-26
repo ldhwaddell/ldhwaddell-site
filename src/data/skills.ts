@@ -6,9 +6,9 @@ import Git from "@/components/icons/Git.svg";
 import NextJS from "@/components/icons/nextjs.svg";
 import Postgres from "@/components/icons/postgres.svg";
 import Python from "@/components/icons/python.svg";
+import Pandas from "@/components/icons/pandas.svg";
 import React from "@/components/icons/react.svg";
 import Selenium from "@/components/icons/selenium.svg";
-import Tailwind from "@/components/icons/tailwind.svg";
 import Typescript from "@/components/icons/typescript.svg";
 
 type Skill = {
@@ -16,17 +16,21 @@ type Skill = {
   Icon: React.ElementType;
 };
 
+export const languages = [];
+export const devops = [];
+export const tools = [];
+
 export const skills: Skill[] = [
   { text: "Python", Icon: Python },
   { text: "Typescript", Icon: Typescript },
-  { text: "Apache Airflow", Icon: Airflow },
   { text: "Amazon Web Services", Icon: AWS },
   { text: "Bash", Icon: Bash },
   { text: "Docker", Icon: Docker },
   { text: "Git", Icon: Git },
-  { text: "Next.js", Icon: NextJS },
   { text: "Postgres", Icon: Postgres },
-  { text: "React", Icon: React },
+  { text: "Apache Airflow", Icon: Airflow },
+  { text: "Pandas", Icon: Pandas },
   { text: "Selenium", Icon: Selenium },
-  { text: "Tailwind", Icon: Tailwind },
+  { text: "Next.js", Icon: NextJS },
+  { text: "React", Icon: React },
 ];
