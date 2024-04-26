@@ -8,7 +8,6 @@ import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -19,6 +18,8 @@ import { Textarea } from "@/components/ui/textarea";
 import { toast } from "@/components/ui/use-toast";
 import { TypographyH2 } from "./typography/h2";
 import PaperPlane from "@/components/icons/paper-plane.svg";
+import { useState } from "react";
+import { Loader2 } from "lucide-react";
 
 const FormSchema = z.object({
   name: z
@@ -44,19 +45,58 @@ const FormSchema = z.object({
 });
 
 const ContactForm = () => {
+  const [loading, setLoading] = useState<boolean>(false);
+
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
+    defaultValues: {
+      name: "",
+      email: "",
+      message: "",
+    },
   });
 
   function onSubmit(data: z.infer<typeof FormSchema>) {
-    toast({
-      title: "Message Sent",
-      description: (
-        <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-          <code className="text-white">{JSON.stringify(data, null, 2)}</code>
-        </pre>
-      ),
-    });
+    const apiEndpoint = "/api/email";
+    setLoading(true);
+
+    fetch(apiEndpoint, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+      .then((res) => {
+        if (!res.ok) {
+          // Throw an error so error toast pops up
+          return res.json().then((response) => {
+            throw new Error(response.message || "Error sending email");
+          });
+        }
+        return res.json();
+      })
+      .then((response) => {
+        toast({
+          title: "Message Sent",
+          description: (
+            <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
+              <code className="text-white">
+                {JSON.stringify(data, null, 2)}
+              </code>
+            </pre>
+          ),
+        });
+      })
+      .catch((err) => {
+        toast({
+          variant: "destructive",
+          title: "Uh oh! Something went wrong.",
+          description:
+            err.toString() || "There was a problem with your request.",
+        });
+      })
+      .finally(() => setLoading(false));
   }
 
   return (
@@ -64,12 +104,13 @@ const ContactForm = () => {
       id="contact"
       className="w-full flex flex-col items-center justify-center py-5"
     >
-      {" "}
       <div className="w-3/4">
-        {" "}
         <TypographyH2 text="Contact Me" />
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 mt-4">
+          <form
+            onSubmit={form.handleSubmit(onSubmit)}
+            className="space-y-4 mt-4"
+          >
             <div className="grid grid-cols-2 gap-3">
               <FormField
                 control={form.control}
@@ -116,9 +157,17 @@ const ContactForm = () => {
                 </FormItem>
               )}
             />
-            <Button type="submit">
-              Send Message <PaperPlane className="ml-3" />
-            </Button>
+            <div className="w-40">
+              {loading ? (
+                <Button disabled className="w-full">
+                  Sending... <Loader2 className="ml-3 h-4 w-4 animate-spin" />
+                </Button>
+              ) : (
+                <Button type="submit" className="w-full">
+                  Send Message <PaperPlane className="ml-3" />
+                </Button>
+              )}
+            </div>
           </form>
         </Form>
       </div>
