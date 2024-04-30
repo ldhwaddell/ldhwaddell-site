@@ -5,12 +5,12 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 
-import { skills } from "@/data/skills";
+import { skills } from "@/config/skills";
 
 export function Skills() {
   return (
     <>
-      <div className="grid grid-cols-4 md:grid-cols-12 sm:grid-cols-8 gap-3">
+      <div className="grid gap-3 grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 xl:grid-cols-12">
         <TooltipProvider delayDuration={100}>
           {skills.map((skill, index) => {
             return (
