@@ -9,7 +9,6 @@ export default function Home() {
   return (
     <main className="flex w-full min-h-screen flex-col items-center mx-auto">
       <Header />
-      <Separator className="mt-24" />
       <About />
       <Separator />
       <Projects />
