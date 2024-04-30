@@ -1,6 +1,6 @@
 import React from "react";
 import { TypographyH2 } from "./typography/h2";
-import { projects } from "@/data/projects";
+import { projects } from "@/config/projects";
 import { GlowCapture, Glow } from "@codaworks/react-glow";
 import { Button } from "./ui/button";
 import { Badge } from "./ui/badge";
@@ -18,19 +18,22 @@ const Projects = () => {
       <div className="w-3/4">
         <TypographyH2 text="Projects" />
 
-        <div className="grid grid-cols gap-3 mt-4">
+        <div className="grid grid-cols-1 gap-3 mt-4">
           {projects.map((project, index) => {
             return (
               <GlowCapture key={index}>
                 <Glow color={project.color}>
-                  <div className="grid grid-cols-2 border rounded-md bg-background-secondary px-5 py-5 glow:ring-[.5] glow:border-glow glow:ring-glow glow:bg-glow/[.15]">
-                    <Image
-                      src={project.image.path}
-                      width={400}
-                      height={400}
-                      alt={project.image.alt}
-                      className="rounded-md drop-shadow-xl"
-                    />
+                  <div className="grid grid-cols-1 md:grid-cols-2 border rounded-md bg-background-secondary px-5 py-5 glow:ring-[.5] glow:border-glow glow:ring-glow glow:bg-glow/[.15]">
+                    <div className="flex justify-center items-center md:items-start md:justify-start md:pr-4">
+                      <Image
+                        src={project.image.path}
+                        width={400}
+                        height={200}
+                        alt={project.image.alt}
+                        className="rounded-sm shadow-xl mb-4 md:mb-0"
+                      />
+                    </div>
+
                     <div>
                       <h3 className="scroll-m-20 text-2xl font-semibold tracking-tight mb-2">
                         {project.title}
