@@ -52,7 +52,7 @@ export const projects: Project[] = [
     description:
       "A tool to scrape all posts, content, and comments from a subreddit",
     image: {
-      path: "/b.png",
+      path: "/reddit-scraper.png",
       alt: "A screenshot of the reddit-scraper CLI",
     },
     color: "#00FF33",
