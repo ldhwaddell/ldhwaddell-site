@@ -19,8 +19,6 @@ export function Terminal() {
     typeof window !== "undefined" ? window.innerWidth : undefined
   );
 
-  console.log(width);
-
   // Handle the width of the screen changing
   useEffect(() => {
     const handleResize = () => {
