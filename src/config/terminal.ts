@@ -1,6 +1,6 @@
 export const terminal = {
   prompt: "lucas@personal-site:~$ ",
-  command: "cat hello.txt",
+  command: "whoami",
   outputDesktop: `  
  _                         __        __        _     _      _ _ 
 | |   _   _  ___ __ _ ___  \\ \\      / /_ _  __| | __| | ___| | |
@@ -20,7 +20,7 @@ export const terminal = {
    \\_/\\_/ \\__,_|\\__,_|\\__,_|\\___|_|_|
       `,
   typingSpeed: 200,
-  sleep: 1000,
+  sleep: 500,
 };
 
 export type terminalConfig = typeof terminal;

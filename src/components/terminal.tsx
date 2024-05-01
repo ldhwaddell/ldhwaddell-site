@@ -36,21 +36,27 @@ export function Terminal() {
   const [width, height] = useDeviceSize();
 
   useEffect(() => {
-    const totalLength = terminal.prompt.length + terminal.command.length;
+    const typeText = async () => {
+      const totalLength = terminal.prompt.length + terminal.command.length;
 
-    if (typedText.length < totalLength) {
-      const timer = setTimeout(() => {
-        setTypedText(
-          typedText +
-            terminal.command.charAt(typedText.length - terminal.prompt.length)
-        );
-      }, terminal.typingSpeed);
+      if (typedText.length < totalLength) {
+        const timer = setTimeout(() => {
+          setTypedText(
+            typedText +
+              terminal.command.charAt(typedText.length - terminal.prompt.length)
+          );
+        }, terminal.typingSpeed);
 
-      return () => clearTimeout(timer);
-    } else if (!showOutput) {
-      setShowOutput(true);
-      setShowRestart(true);
-    }
+        return () => clearTimeout(timer);
+      } else if (!showOutput) {
+        // Mimic delay after hitting enter on a command
+        await new Promise((resolve) => setTimeout(resolve, terminal.sleep));
+        setShowOutput(true);
+        setShowRestart(true);
+      }
+    };
+
+    typeText();
   }, [typedText, showOutput]);
 
   useEffect(() => {
@@ -58,6 +64,7 @@ export function Terminal() {
       // Append the appropriate output based on screen size after command is fully typed
       const output =
         width < 880 ? terminal.outputMobile : terminal.outputDesktop;
+
       setOutputText(output);
     }
   }, [showOutput, width]);
@@ -80,12 +87,11 @@ export function Terminal() {
         <pre
           className={cn(
             monoFont.className,
-            " h-full w-full text-primary p-6 font-mono whitespace-pre leading-tight flex flex-col relative"
+            "h-full w-full text-primary p-6 font-mono whitespace-pre leading-tight flex flex-col relative"
           )}
         >
           <span>{typedText}</span>
-
-          <span className="p-0 text-center">{outputText}</span>
+          <span className="text-center">{outputText}</span>
         </pre>
         {showRestart && (
           <Button
