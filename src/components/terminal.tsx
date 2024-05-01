@@ -19,6 +19,8 @@ export function Terminal() {
     typeof window !== "undefined" ? window.innerWidth : undefined
   );
 
+  console.log(width);
+
   // Handle the width of the screen changing
   useEffect(() => {
     const handleResize = () => {
@@ -62,7 +64,7 @@ export function Terminal() {
   useEffect(() => {
     if (showOutput && width !== undefined) {
       const output =
-        width < 880 ? terminal.outputMobile : terminal.outputDesktop;
+        width < 881 ? terminal.outputMobile : terminal.outputDesktop;
       setOutputText(output);
     }
   }, [showOutput, width]);
@@ -76,7 +78,7 @@ export function Terminal() {
 
   return (
     <section className="w-full flex flex-col items-center justify-center py-0 bg-secondary">
-      <div className={cn("w-3/4 min-w-[400px] relative terminal-height")}>
+      <div className="w-3/4 min-w-[400px] relative terminal-height">
         <pre
           className={cn(
             monoFont.className,

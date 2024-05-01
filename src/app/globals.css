@@ -82,3 +82,15 @@
     @apply bg-background text-foreground;
   }
 }
+
+@media (max-width: 880px) {
+  .terminal-height {
+    height: 288px;
+  }
+}
+
+@media (min-width: 881px) {
+  .terminal-height {
+    height: 208px;
+  }
+}
