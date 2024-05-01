@@ -33,6 +33,8 @@
     --ring: 132 24% 75%;
 
     --radius: 0.5rem;
+
+    --terminal: 180 4% 5%;
   }
 
   .dark {
@@ -63,6 +65,8 @@
     --border: 120 2% 12%;
     --input: 120 2% 18%;
     --ring: 132 100% 40%;
+
+    --terminal: 132 100% 50%;
   }
 
   section {

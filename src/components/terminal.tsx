@@ -10,31 +10,30 @@ import { cn } from "@/lib/utils";
 
 const monoFont = localFont({ src: "../fonts/JetBrainsMono-Regular.ttf" });
 
-const useDeviceSize = () => {
-  const [width, setWidth] = useState(0);
-  const [height, setHeight] = useState(0);
-
-  const handleWindowResize = () => {
-    setWidth(window.innerWidth);
-    setHeight(window.innerHeight);
-  };
-
-  useEffect(() => {
-    handleWindowResize();
-    window.addEventListener("resize", handleWindowResize);
-    return () => window.removeEventListener("resize", handleWindowResize);
-  }, []);
-
-  return [width, height];
-};
-
 export function Terminal() {
   const [showRestart, setShowRestart] = useState(false);
   const [typedText, setTypedText] = useState(terminal.prompt);
   const [outputText, setOutputText] = useState("");
   const [showOutput, setShowOutput] = useState(false);
-  const [width, height] = useDeviceSize();
+  const [width, setWidth] = useState(
+    typeof window !== "undefined" ? window.innerWidth : undefined
+  );
 
+  // Handle the width of the screen changing
+  useEffect(() => {
+    const handleResize = () => {
+      setWidth(window.innerWidth);
+    };
+
+    window.addEventListener("resize", handleResize);
+    handleResize();
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  // Handle the typing of the text
   useEffect(() => {
     const typeText = async () => {
       const totalLength = terminal.prompt.length + terminal.command.length;
@@ -59,12 +58,11 @@ export function Terminal() {
     typeText();
   }, [typedText, showOutput]);
 
+  // Handle the display of the command output based on screen size
   useEffect(() => {
-    if (showOutput) {
-      // Append the appropriate output based on screen size after command is fully typed
+    if (showOutput && width !== undefined) {
       const output =
         width < 880 ? terminal.outputMobile : terminal.outputDesktop;
-
       setOutputText(output);
     }
   }, [showOutput, width]);
@@ -77,17 +75,12 @@ export function Terminal() {
   };
 
   return (
-    <section className="w-full flex flex-col items-center justify-center py-0 bg-background">
-      <div
-        className={cn(
-          width < 880 ? " h-[288px]" : "h-[208px]",
-          "w-3/4 min-w-[400px] bg-secondary relative"
-        )}
-      >
+    <section className="w-full flex flex-col items-center justify-center py-0 bg-secondary">
+      <div className={cn("w-3/4 min-w-[400px] relative terminal-height")}>
         <pre
           className={cn(
             monoFont.className,
-            "h-full w-full text-primary p-6 font-mono whitespace-pre leading-tight flex flex-col relative"
+            "h-full w-full text-terminal p-6 font-mono whitespace-pre leading-tight flex flex-col relative"
           )}
         >
           <span>{typedText}</span>
