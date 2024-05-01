@@ -10,35 +10,82 @@ import { cn } from "@/lib/utils";
 
 const monoFont = localFont({ src: "../fonts/JetBrainsMono-Regular.ttf" });
 
-export function Terminal() {
-  const [typedText, setTypedText] = useState("");
-  const [showRestart, setShowRestart] = useState(false);
+const useDeviceSize = () => {
+  const [width, setWidth] = useState(0);
+  const [height, setHeight] = useState(0);
+
+  const handleWindowResize = () => {
+    setWidth(window.innerWidth);
+    setHeight(window.innerHeight);
+  };
 
   useEffect(() => {
-    if (typedText.length < terminal.text.length) {
-      setTimeout(() => {
-        setTypedText(typedText + terminal.text.charAt(typedText.length));
-      }, 5);
-    } else {
+    handleWindowResize();
+    window.addEventListener("resize", handleWindowResize);
+    return () => window.removeEventListener("resize", handleWindowResize);
+  }, []);
+
+  return [width, height];
+};
+
+export function Terminal() {
+  const [showRestart, setShowRestart] = useState(false);
+  const [typedText, setTypedText] = useState(terminal.prompt);
+  const [outputText, setOutputText] = useState("");
+  const [showOutput, setShowOutput] = useState(false);
+  const [width, height] = useDeviceSize();
+
+  useEffect(() => {
+    const totalLength = terminal.prompt.length + terminal.command.length;
+
+    if (typedText.length < totalLength) {
+      const timer = setTimeout(() => {
+        setTypedText(
+          typedText +
+            terminal.command.charAt(typedText.length - terminal.prompt.length)
+        );
+      }, terminal.typingSpeed);
+
+      return () => clearTimeout(timer);
+    } else if (!showOutput) {
+      setShowOutput(true);
       setShowRestart(true);
     }
-  }, [typedText, terminal.text]);
+  }, [typedText, showOutput]);
+
+  useEffect(() => {
+    if (showOutput) {
+      // Append the appropriate output based on screen size after command is fully typed
+      const output =
+        width < 880 ? terminal.outputMobile : terminal.outputDesktop;
+      setOutputText(output);
+    }
+  }, [showOutput, width]);
 
   const handleRestart = () => {
-    setTypedText("");
+    setTypedText(terminal.prompt);
     setShowRestart(false);
+    setShowOutput(false);
+    setOutputText("");
   };
 
   return (
     <section className="w-full flex flex-col items-center justify-center py-0 bg-background">
-      <div className="w-3/4 bg-secondary h-[300px] relative">
+      <div
+        className={cn(
+          width < 880 ? " h-[288px]" : "h-[208px]",
+          "w-3/4 min-w-[400px] bg-secondary relative"
+        )}
+      >
         <pre
           className={cn(
             monoFont.className,
-            "text-primary p-6 font-mono whitespace-pre leading-tight"
+            " h-full w-full text-primary p-6 font-mono whitespace-pre leading-tight flex flex-col relative"
           )}
         >
-          {typedText}
+          <span>{typedText}</span>
+
+          <span className="p-0 text-center">{outputText}</span>
         </pre>
         {showRestart && (
           <Button
