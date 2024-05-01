@@ -6,7 +6,7 @@ import { Button } from "./ui/button";
 import { Badge } from "./ui/badge";
 import Image from "next/image";
 import Link from "next/link";
-import ExternalLink from "@/components/icons/external-link.svg";
+import { Icons } from "./icons";
 import { Separator } from "./ui/separator";
 
 const Projects = () => {
@@ -57,7 +57,7 @@ const Projects = () => {
                           target="_blank"
                           rel="noopener noreferrer"
                         >
-                          GitHub <ExternalLink className="ml-3" />
+                          GitHub <Icons.externalLink className="ml-3" />
                         </Link>
                       </Button>
                     </div>

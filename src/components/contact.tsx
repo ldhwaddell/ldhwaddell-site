@@ -17,9 +17,8 @@ import { Input } from "./ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "@/components/ui/use-toast";
 import { TypographyH2 } from "./typography/h2";
-import PaperPlane from "@/components/icons/paper-plane.svg";
+import { Icons } from "./icons";
 import { useState } from "react";
-import { Loader2 } from "lucide-react";
 
 const FormSchema = z.object({
   name: z
@@ -160,11 +159,11 @@ const ContactForm = () => {
             <div className="w-40">
               {sending ? (
                 <Button disabled className="w-full">
-                  Sending... <Loader2 className="ml-3 h-4 w-4 animate-spin" />
+                  Sending... <Icons.spinner className="ml-3 h-4 w-4 animate-spin" />
                 </Button>
               ) : (
                 <Button type="submit" className="w-full">
-                  Send Message <PaperPlane className="ml-3" />
+                  Send Message <Icons.paperPlane className="ml-3" />
                 </Button>
               )}
             </div>
