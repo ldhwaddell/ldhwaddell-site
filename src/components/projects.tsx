@@ -27,8 +27,9 @@ const Projects = () => {
                     <div className="flex justify-center items-center md:items-start md:justify-start md:pr-4">
                       <Image
                         src={project.image.path}
+                        priority={project?.priority}
                         width={400}
-                        height={200}
+                        height={400}
                         alt={project.image.alt}
                         className="rounded-sm shadow-xl mb-4 md:mb-0"
                       />

@@ -8,6 +8,7 @@ type Project = {
   color: string;
   link: string;
   tags: string[];
+  priority?: boolean;
 };
 
 export const projects: Project[] = [
@@ -46,6 +47,7 @@ export const projects: Project[] = [
     color: "#00FF33",
     link: "https://github.com/ldhwaddell/pptx-parser",
     tags: ["Python", "Whisper", "Transformers"],
+    priority: true
   },
   {
     title: "Reddit Scraper",
