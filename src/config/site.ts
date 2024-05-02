@@ -5,7 +5,7 @@ export const siteConfig = {
     "A personal site to host projects, experiments, achievements, and anything else I find interesting.",
   links: {
     github: "https://github.com/ldhwaddell",
-    linkedin: "www.linkedin.com/in/lucas-waddell-09725724b",
+    linkedin: "https://linkedin.com/in/lucas-waddell-09725724b",
   },
 };
 
