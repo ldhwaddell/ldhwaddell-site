@@ -4,7 +4,9 @@ import { Inter as FontSans } from "next/font/google";
 import { cn } from "@/lib/utils";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/toaster";
-import { SiteConfig, siteConfig } from "@/config/site";
+import { siteConfig } from "@/config/site";
+import { Analytics } from "@vercel/analytics/react"
+
 
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -40,6 +42,7 @@ export default function RootLayout({
             {children}
             <Toaster />
           </ThemeProvider>
+          <Analytics />
         </body>
       </html>
     </>
