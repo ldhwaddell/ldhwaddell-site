@@ -4,6 +4,7 @@ import { Inter as FontSans } from "next/font/google";
 import { cn } from "@/lib/utils";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/toaster";
+import { SiteConfig, siteConfig } from "@/config/site";
 
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -11,8 +12,8 @@ const fontSans = FontSans({
 });
 
 export const metadata: Metadata = {
-  title: "Lucas Waddell",
-  description: "Personal site",
+  title: siteConfig.name,
+  description: siteConfig.description,
 };
 
 export default function RootLayout({
