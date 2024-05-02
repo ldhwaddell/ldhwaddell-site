@@ -24,14 +24,14 @@ const Projects = () => {
               <GlowCapture key={index}>
                 <Glow color={project.color}>
                   <div className="grid grid-cols-1 md:grid-cols-2 border rounded-md bg-background-secondary px-5 py-5 glow:ring-[.5] glow:border-glow glow:ring-glow glow:bg-glow/[.15]">
-                    <div className="flex justify-center items-center md:items-start md:justify-start md:pr-4">
+                    <div className="flex justify-center items-center pb-4 md:pr-4">
                       <Image
                         src={project.image.path}
                         priority={project?.priority}
                         width={400}
                         height={400}
                         alt={project.image.alt}
-                        className="rounded-sm shadow-xl mb-4 md:mb-0"
+                        className="rounded-sm shadow-xl"
                       />
                     </div>
 
