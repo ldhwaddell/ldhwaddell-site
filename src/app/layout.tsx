@@ -5,8 +5,8 @@ import { cn } from "@/lib/utils";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/toaster";
 import { siteConfig } from "@/config/site";
-import { Analytics } from "@vercel/analytics/react"
-
+import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -43,6 +43,7 @@ export default function RootLayout({
             <Toaster />
           </ThemeProvider>
           <Analytics />
+          <SpeedInsights />
         </body>
       </html>
     </>
