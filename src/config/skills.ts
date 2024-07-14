@@ -12,6 +12,7 @@ export const tools = [];
 export const skills: Skill[] = [
   { text: "Python", Icon: Icons.python },
   { text: "Typescript", Icon: Icons.typeScript },
+  { text: "Rust", Icon: Icons.rust },
   { text: "Amazon Web Services", Icon: Icons.aws },
   { text: "Bash", Icon: Icons.bash },
   { text: "Docker", Icon: Icons.docker },
